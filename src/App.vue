@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from "vue";
+import CarpoolConsole from "./components/CarpoolConsole.vue";
 
 type Field = {
   key: string;
@@ -265,6 +266,8 @@ function remove(id: string) {
           </div>
         </section>
       </section>
+
+      <CarpoolConsole />
     </div>
   </main>
 </template>
