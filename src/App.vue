@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from "vue";
+import CarpoolPage from "./carpool/CarpoolPage.vue";
+
+const tabs = ["运费试算", "拼车批次台"] as const;
+const tab = ref<(typeof tabs)[number]>("运费试算");
 
 type Field = {
   key: string;
@@ -202,6 +206,21 @@ function remove(id: string) {
         </div>
       </header>
 
+      <nav class="tabs">
+        <button
+          v-for="item in tabs"
+          :key="item"
+          type="button"
+          :class="['tab-btn', { active: tab === item }]"
+          @click="tab = item"
+        >
+          {{ item }}
+        </button>
+      </nav>
+
+      <CarpoolPage v-if="tab === '拼车批次台'" />
+
+      <template v-else>
       <section class="metrics">
         <article v-for="(label, index) in project.metricLabels" :key="label" class="metric">
           <span>{{ label }}</span>
@@ -265,6 +284,7 @@ function remove(id: string) {
           </div>
         </section>
       </section>
+      </template>
     </div>
   </main>
 </template>
